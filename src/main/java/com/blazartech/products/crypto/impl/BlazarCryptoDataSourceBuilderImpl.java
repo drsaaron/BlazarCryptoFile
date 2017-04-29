@@ -19,7 +19,7 @@ import org.springframework.stereotype.Component;
  * @author aar1069
  */
 @Component
-public class BlazarCryptoDataSourceBuilderImpl implements BlazarCryptoDataSourceBuilder {
+class BlazarCryptoDataSourceBuilderImpl implements BlazarCryptoDataSourceBuilder {
 
     private static final Logger logger = Logger.getLogger(BlazarCryptoDataSourceBuilderImpl.class);
     

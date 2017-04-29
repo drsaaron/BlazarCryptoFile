@@ -5,6 +5,8 @@
 package com.blazartech.products.crypto.impl;
 
 import com.blazartech.products.crypto.BlazarCryptoFileKey;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
 /**
  * define an object to combine the user ID and resource.
@@ -15,7 +17,9 @@ import com.blazartech.products.crypto.BlazarCryptoFileKey;
 
 /* $Log$
  *******************************************************************************/
-public class BlazarCryptoFileKeyImpl implements BlazarCryptoFileKey {
+@Component
+@Scope("prototype")
+class BlazarCryptoFileKeyImpl implements BlazarCryptoFileKey {
 
     private String userID;
     private String resource;
@@ -39,7 +43,7 @@ public class BlazarCryptoFileKeyImpl implements BlazarCryptoFileKey {
     }
     
     @Override
-    public int compareTo(BlazarCryptoFileKeyImpl o) {
+    public int compareTo(BlazarCryptoFileKey o) {
         if (getUserID().compareTo(o.getUserID()) == 0) {
             return getResource().compareTo(o.getResource());
         } else {

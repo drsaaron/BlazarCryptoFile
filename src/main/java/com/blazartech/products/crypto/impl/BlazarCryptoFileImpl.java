@@ -16,7 +16,9 @@ import java.io.PrintWriter;
 import java.util.Collection;
 import java.util.Map;
 import java.util.TreeMap;
+import javax.inject.Provider;
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -30,17 +32,20 @@ import org.springframework.stereotype.Service;
 /* $Log$
  *******************************************************************************/
 @Service
-public class BlazarCryptoFileImpl implements BlazarCryptoFile {
+class BlazarCryptoFileImpl implements BlazarCryptoFile, InitializingBean {
 
     private static final Logger logger = Logger.getLogger(BlazarCryptoFileImpl.class);
-    
+
     private final Map<BlazarCryptoFileKey, String> cryptoData = new TreeMap<>();
 
     @Value("${blazartech.crypto.file}")
     private String fileName;
-    
+
     @Autowired
     private EncryptionScheme encryptionScheme;
+
+    @Autowired
+    private Provider<BlazarCryptoFileKeyImpl> keyProvider;
 
     private static final String delimiter = ":";
 
@@ -80,7 +85,7 @@ public class BlazarCryptoFileImpl implements BlazarCryptoFile {
     }
 
     private BlazarCryptoFileKeyImpl makeKey(String userID, String resource) {
-        BlazarCryptoFileKeyImpl key = new BlazarCryptoFileKeyImpl();
+        BlazarCryptoFileKeyImpl key = keyProvider.get();
         key.setUserID(userID);
         key.setResource(resource);
         return key;
@@ -95,26 +100,18 @@ public class BlazarCryptoFileImpl implements BlazarCryptoFile {
     @Override
     public String getPassword(String userID, String resource) {
         logger.info("getting password for " + userID + "/" + resource);
-        try {
-            loadCryptoFile();
 
-            String encryptedPassword = cryptoData.get(makeKey(userID, resource));
-            if (encryptedPassword == null) {
-                throw new IllegalArgumentException("no crypto entry found for " + userID + "/" + resource);
-            }
-            String decryptedPassword = encryptionScheme.decrypt(encryptedPassword);
-            return decryptedPassword;
-        } catch (IOException e) {
-            logger.error("error reading crypto file: " + e.getMessage(), e);
-            throw new RuntimeException("error reading crypto file: " + e.getMessage(), e);
+        String encryptedPassword = cryptoData.get(makeKey(userID, resource));
+        if (encryptedPassword == null) {
+            throw new IllegalArgumentException("no crypto entry found for " + userID + "/" + resource);
         }
+        String decryptedPassword = encryptionScheme.decrypt(encryptedPassword);
+        return decryptedPassword;
     }
 
     @Override
     public void updatePassword(String userID, String resource, String password) {
         try {
-            loadCryptoFile();
-
             BlazarCryptoFileKeyImpl key = makeKey(userID, resource);
             cryptoData.put(key, encryptionScheme.encrypt(password));
 
@@ -127,12 +124,11 @@ public class BlazarCryptoFileImpl implements BlazarCryptoFile {
 
     @Override
     public Collection<BlazarCryptoFileKey> getKeys() {
-        try {
-            loadCryptoFile();
-            return cryptoData.keySet();
-        } catch (IOException e) {
-            logger.error("error reading crypto file: " + e.getMessage(), e);
-            throw new RuntimeException("error reading crypto file: " + e.getMessage(), e);
-        }
+        return cryptoData.keySet();
+    }
+
+    @Override
+    public void afterPropertiesSet() throws Exception {
+        loadCryptoFile();
     }
 }

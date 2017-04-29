@@ -4,7 +4,6 @@
  */
 package com.blazartech.products.crypto;
 
-import com.blazartech.products.crypto.impl.BlazarCryptoFileKeyImpl;
 import java.io.Serializable;
 
 /**
@@ -14,7 +13,7 @@ import java.io.Serializable;
  * @author aar1069
  * @version $Id: BlazarCryptoFileKey.java 431 2016-11-07 17:13:47Z aar1069 $
  */
-public interface BlazarCryptoFileKey extends Comparable<BlazarCryptoFileKeyImpl>, Serializable {
+public interface BlazarCryptoFileKey extends Comparable<BlazarCryptoFileKey>, Serializable {
 
     /**
      * get the resource ID

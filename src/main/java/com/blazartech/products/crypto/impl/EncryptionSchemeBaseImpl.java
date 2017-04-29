@@ -37,7 +37,7 @@ import org.springframework.beans.factory.annotation.Value;
  * @author aar1069
  * @version $Id: EncryptionSchemeBaseImpl.java 431 2016-11-07 17:13:47Z aar1069 $
  */
-public abstract class EncryptionSchemeBaseImpl implements EncryptionScheme, InitializingBean {
+abstract class EncryptionSchemeBaseImpl implements EncryptionScheme, InitializingBean {
     
     private static final Logger logger = Logger.getLogger(EncryptionSchemeBaseImpl.class);
     

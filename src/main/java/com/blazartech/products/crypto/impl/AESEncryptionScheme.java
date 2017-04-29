@@ -19,7 +19,7 @@ import org.springframework.stereotype.Service;
 /* $Log$
  *******************************************************************************/
 @Service
-public class AESEncryptionScheme extends EncryptionSchemeBaseImpl implements EncryptionScheme {
+class AESEncryptionScheme extends EncryptionSchemeBaseImpl implements EncryptionScheme {
 
     private static final Logger logger = Logger.getLogger(AESEncryptionScheme.class);
 
