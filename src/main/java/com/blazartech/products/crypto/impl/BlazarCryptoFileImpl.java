@@ -57,7 +57,7 @@ class BlazarCryptoFileImpl implements BlazarCryptoFile, InitializingBean {
         return f;
     }
 
-    private synchronized void readCryptoFile() throws IOException {
+    private void readCryptoFile() throws IOException {
         logger.info("reading crypto file " + fileName);
         File f = getCryptoFile();
         try (BufferedReader is = new BufferedReader(new FileReader(f))) {
@@ -91,7 +91,7 @@ class BlazarCryptoFileImpl implements BlazarCryptoFile, InitializingBean {
         return key;
     }
 
-    private synchronized void loadCryptoFile() throws IOException {
+    private void loadCryptoFile() throws IOException {
         if (cryptoData.isEmpty()) {
             readCryptoFile();
         }
