@@ -31,7 +31,7 @@ import org.springframework.stereotype.Service;
 
 /* $Log$
  *******************************************************************************/
-@Service
+
 class BlazarCryptoFileImpl implements BlazarCryptoFile, InitializingBean {
 
     private static final Logger logger = Logger.getLogger(BlazarCryptoFileImpl.class);
