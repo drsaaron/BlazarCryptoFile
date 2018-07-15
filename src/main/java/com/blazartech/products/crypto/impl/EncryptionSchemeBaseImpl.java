@@ -21,7 +21,8 @@ import javax.crypto.KeyGenerator;
 import javax.crypto.NoSuchPaddingException;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Value;
 
@@ -39,7 +40,7 @@ import org.springframework.beans.factory.annotation.Value;
  */
 abstract class EncryptionSchemeBaseImpl implements EncryptionScheme, InitializingBean {
     
-    private static final Logger logger = Logger.getLogger(EncryptionSchemeBaseImpl.class);
+    private static final Logger logger = LoggerFactory.getLogger(EncryptionSchemeBaseImpl.class);
     
     private File keyFile;
     
@@ -103,7 +104,7 @@ abstract class EncryptionSchemeBaseImpl implements EncryptionScheme, Initializin
             return encrypted;
 
         } catch (NoSuchAlgorithmException | IOException | InvalidKeyException | InvalidAlgorithmParameterException | IllegalBlockSizeException | BadPaddingException e) {
-            logger.error(e);
+            logger.error("error encrypting: " + e.getMessage(), e);
             throw new RuntimeException("error encrypting: " + e.getMessage(), e);
         }
     }
@@ -128,7 +129,7 @@ abstract class EncryptionSchemeBaseImpl implements EncryptionScheme, Initializin
             byte[] decrypted = cipher.doFinal(bytes);
             return decrypted;
         } catch (NoSuchAlgorithmException | IOException | InvalidKeyException | IllegalBlockSizeException | BadPaddingException e) {
-            logger.error(e);
+            logger.error("error decrypting: " + e.getMessage(), e);
             throw new RuntimeException("error decrypting: " + e.getMessage(), e);
         }
     }

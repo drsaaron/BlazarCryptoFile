@@ -17,11 +17,11 @@ import java.util.Collection;
 import java.util.Map;
 import java.util.TreeMap;
 import javax.inject.Provider;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Service;
 
 /**
  *
@@ -34,7 +34,7 @@ import org.springframework.stereotype.Service;
 
 class BlazarCryptoFileImpl implements BlazarCryptoFile, InitializingBean {
 
-    private static final Logger logger = Logger.getLogger(BlazarCryptoFileImpl.class);
+    private static final Logger logger = LoggerFactory.getLogger(BlazarCryptoFileImpl.class);
 
     private final Map<BlazarCryptoFileKey, String> cryptoData = new TreeMap<>();
 

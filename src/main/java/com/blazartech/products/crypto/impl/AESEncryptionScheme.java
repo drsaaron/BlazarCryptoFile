@@ -5,7 +5,8 @@
 package com.blazartech.products.crypto.impl;
 
 import com.blazartech.products.crypto.EncryptionScheme;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 /**
@@ -21,7 +22,7 @@ import org.springframework.stereotype.Service;
 @Service
 class AESEncryptionScheme extends EncryptionSchemeBaseImpl implements EncryptionScheme {
 
-    private static final Logger logger = Logger.getLogger(AESEncryptionScheme.class);
+    private static final Logger logger = LoggerFactory.getLogger(AESEncryptionScheme.class);
 
     private static final String AES = "AES";
     private static final int KEY_SIZE = 128;

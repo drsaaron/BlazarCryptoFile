@@ -9,7 +9,8 @@ import com.blazartech.products.crypto.BlazarCryptoDataSource;
 import com.blazartech.products.crypto.BlazarCryptoDataSourceBuilder;
 import com.blazartech.products.crypto.BlazarCryptoFile;
 import javax.sql.DataSource;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.stereotype.Component;
@@ -21,7 +22,7 @@ import org.springframework.stereotype.Component;
 @Component
 class BlazarCryptoDataSourceBuilderImpl implements BlazarCryptoDataSourceBuilder {
 
-    private static final Logger logger = Logger.getLogger(BlazarCryptoDataSourceBuilderImpl.class);
+    private static final Logger logger = LoggerFactory.getLogger(BlazarCryptoDataSourceBuilderImpl.class);
     
     @Autowired
     private BlazarCryptoFile cryptoFile;

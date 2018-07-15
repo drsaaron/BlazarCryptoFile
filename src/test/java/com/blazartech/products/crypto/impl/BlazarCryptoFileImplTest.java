@@ -8,7 +8,6 @@ package com.blazartech.products.crypto.impl;
 import com.blazartech.products.crypto.BlazarCryptoFileKey;
 import com.blazartech.products.crypto.EncryptionScheme;
 import java.util.Collection;
-import org.apache.log4j.Logger;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -16,6 +15,8 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.runner.RunWith;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -32,7 +33,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 @ContextConfiguration(classes = BlazarCryptoFileImplTest.BlazarCryptoFileImplTestConfig.class )
 public class BlazarCryptoFileImplTest {
     
-    private static final Logger logger = Logger.getLogger(BlazarCryptoFileImplTest.class);
+    private static final Logger logger = LoggerFactory.getLogger(BlazarCryptoFileImplTest.class);
     
     @Configuration
     @PropertySource("classpath:test.properties")
