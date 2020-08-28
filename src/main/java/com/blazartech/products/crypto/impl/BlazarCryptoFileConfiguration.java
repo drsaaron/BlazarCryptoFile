@@ -17,7 +17,6 @@ import org.springframework.context.annotation.Scope;
  * @author AAR1069
  */
 @Configuration
-@PropertySource("file:${user.home}/.blazartech/crypto.properties")
 public class BlazarCryptoFileConfiguration {
     
     @Bean
