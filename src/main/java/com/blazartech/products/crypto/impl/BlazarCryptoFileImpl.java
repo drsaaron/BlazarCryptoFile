@@ -47,7 +47,7 @@ class BlazarCryptoFileImpl implements BlazarCryptoFile, InitializingBean {
     @Autowired
     private Provider<BlazarCryptoFileKeyImpl> keyProvider;
 
-    private static final String delimiter = ":";
+    private static final String DELIMITER = ":";
 
     private File getCryptoFile() throws IOException {
         File f = new File(fileName);
@@ -63,7 +63,7 @@ class BlazarCryptoFileImpl implements BlazarCryptoFile, InitializingBean {
         try (BufferedReader is = new BufferedReader(new FileReader(f))) {
             String line;
             while ((line = is.readLine()) != null) {
-                String[] elements = line.split(delimiter);
+                String[] elements = line.split(DELIMITER);
                 BlazarCryptoFileKeyImpl key = makeKey(elements[0], elements[1]);
                 cryptoData.put(key, elements[2]);
             }
@@ -76,7 +76,7 @@ class BlazarCryptoFileImpl implements BlazarCryptoFile, InitializingBean {
         try (PrintWriter pw = new PrintWriter(new FileWriter(f))) {
             getKeys().stream().map((key) -> {
                 String password = cryptoData.get(key);
-                String formattedData = key.getUserID() + delimiter + key.getResource() + delimiter + password;
+                String formattedData = key.getUserID() + DELIMITER + key.getResource() + DELIMITER + password;
                 return formattedData;
             }).forEach((formattedData) -> {
                 pw.println(formattedData);

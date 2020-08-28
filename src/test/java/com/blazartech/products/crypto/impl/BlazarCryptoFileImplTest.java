@@ -30,7 +30,10 @@ import org.springframework.test.context.junit4.SpringRunner;
  * @author AAR1069
  */
 @RunWith(SpringRunner.class)
-@ContextConfiguration(classes = BlazarCryptoFileImplTest.BlazarCryptoFileImplTestConfig.class )
+@ContextConfiguration(classes = {
+    BlazarCryptoFileImplTest.BlazarCryptoFileImplTestConfig.class,
+    BlazarCryptoFileConfiguration.class 
+})
 public class BlazarCryptoFileImplTest {
     
     private static final Logger logger = LoggerFactory.getLogger(BlazarCryptoFileImplTest.class);
@@ -39,21 +42,6 @@ public class BlazarCryptoFileImplTest {
     @PropertySource("classpath:test.properties")
     static class BlazarCryptoFileImplTestConfig {
         
-        @Bean
-        public EncryptionScheme getEncryptionScheme() {
-            return new AESEncryptionScheme();
-        }
-        
-        @Bean
-        public BlazarCryptoFileImpl getCryptoFile() {
-            return new BlazarCryptoFileImpl();
-        }
-        
-        @Bean
-        @Scope("prototype")
-        public BlazarCryptoFileKeyImpl getCryptoFileKey() {
-            return new BlazarCryptoFileKeyImpl();
-        }
     }
     
     @Autowired

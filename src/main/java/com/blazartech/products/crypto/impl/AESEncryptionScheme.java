@@ -7,7 +7,6 @@ package com.blazartech.products.crypto.impl;
 import com.blazartech.products.crypto.EncryptionScheme;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Service;
 
 /**
  * Use AES for encrypting and decrypting.  A key will be stored in a file.
@@ -19,7 +18,6 @@ import org.springframework.stereotype.Service;
 
 /* $Log$
  *******************************************************************************/
-@Service
 class AESEncryptionScheme extends EncryptionSchemeBaseImpl implements EncryptionScheme {
 
     private static final Logger logger = LoggerFactory.getLogger(AESEncryptionScheme.class);
