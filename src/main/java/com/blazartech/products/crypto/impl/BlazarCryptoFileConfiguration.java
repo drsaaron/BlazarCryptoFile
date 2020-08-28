@@ -6,9 +6,11 @@
 package com.blazartech.products.crypto.impl;
 
 import com.blazartech.products.crypto.BlazarCryptoFile;
+import com.blazartech.products.crypto.EncryptionScheme;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.annotation.Scope;
 
 /**
  *
@@ -21,5 +23,16 @@ public class BlazarCryptoFileConfiguration {
     @Bean
     public BlazarCryptoFile getBlazarCryptoFile() {
         return new BlazarCryptoFileImpl();
+    }
+    
+    @Bean
+    public EncryptionScheme encryptionScheme() {
+        return new AESEncryptionScheme();
+    }
+    
+    @Bean
+    @Scope("prototype")
+    public BlazarCryptoFileKeyImpl keyProvider() {
+        return new BlazarCryptoFileKeyImpl();
     }
 }

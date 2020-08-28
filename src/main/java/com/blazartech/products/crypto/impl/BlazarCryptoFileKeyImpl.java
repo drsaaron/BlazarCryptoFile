@@ -5,8 +5,6 @@
 package com.blazartech.products.crypto.impl;
 
 import com.blazartech.products.crypto.BlazarCryptoFileKey;
-import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Component;
 
 /**
  * define an object to combine the user ID and resource.
@@ -17,8 +15,7 @@ import org.springframework.stereotype.Component;
 
 /* $Log$
  *******************************************************************************/
-@Component
-@Scope("prototype")
+
 class BlazarCryptoFileKeyImpl implements BlazarCryptoFileKey {
 
     private String userID;
