@@ -16,7 +16,6 @@ import java.io.PrintWriter;
 import java.util.Collection;
 import java.util.Map;
 import java.util.TreeMap;
-import javax.inject.Provider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
@@ -43,9 +42,6 @@ class BlazarCryptoFileImpl implements BlazarCryptoFile, InitializingBean {
 
     @Autowired
     private EncryptionScheme encryptionScheme;
-
-    @Autowired
-    private Provider<BlazarCryptoFileKeyImpl> keyProvider;
 
     private static final String DELIMITER = ":";
 
@@ -85,7 +81,7 @@ class BlazarCryptoFileImpl implements BlazarCryptoFile, InitializingBean {
     }
 
     private BlazarCryptoFileKeyImpl makeKey(String userID, String resource) {
-        BlazarCryptoFileKeyImpl key = keyProvider.get();
+        BlazarCryptoFileKeyImpl key = new BlazarCryptoFileKeyImpl();
         key.setUserID(userID);
         key.setResource(resource);
         return key;

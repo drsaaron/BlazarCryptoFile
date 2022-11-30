@@ -7,10 +7,9 @@ package com.blazartech.products.crypto.impl;
 
 import com.blazartech.products.crypto.BlazarCryptoFile;
 import com.blazartech.products.crypto.EncryptionScheme;
+import javax.inject.Provider;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
-import org.springframework.context.annotation.Scope;
 
 /**
  *
@@ -28,10 +27,5 @@ public class BlazarCryptoFileConfiguration {
     public EncryptionScheme encryptionScheme() {
         return new AESEncryptionScheme();
     }
-    
-    @Bean
-    @Scope("prototype")
-    public BlazarCryptoFileKeyImpl keyProvider() {
-        return new BlazarCryptoFileKeyImpl();
-    }
+
 }

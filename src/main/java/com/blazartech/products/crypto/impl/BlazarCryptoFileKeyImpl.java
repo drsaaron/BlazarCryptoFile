@@ -16,7 +16,7 @@ import com.blazartech.products.crypto.BlazarCryptoFileKey;
 /* $Log$
  *******************************************************************************/
 
-class BlazarCryptoFileKeyImpl implements BlazarCryptoFileKey {
+public class BlazarCryptoFileKeyImpl implements BlazarCryptoFileKey {
 
     private String userID;
     private String resource;
