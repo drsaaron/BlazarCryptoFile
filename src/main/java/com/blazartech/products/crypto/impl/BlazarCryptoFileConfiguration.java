@@ -7,7 +7,6 @@ package com.blazartech.products.crypto.impl;
 
 import com.blazartech.products.crypto.BlazarCryptoFile;
 import com.blazartech.products.crypto.EncryptionScheme;
-import javax.inject.Provider;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
