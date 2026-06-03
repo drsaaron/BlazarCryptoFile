@@ -41,4 +41,12 @@ public interface BlazarCryptoFile {
      * @return 
      */
     Collection<BlazarCryptoFileKey> getKeys();
+    
+    /**
+     * delete a password via the userID/resource key
+     * 
+     * @param userID
+     * @param resource 
+     */
+    void deletePassword(String userID, String resource);
 }

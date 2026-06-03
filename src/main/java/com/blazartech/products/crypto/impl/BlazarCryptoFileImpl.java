@@ -117,6 +117,20 @@ class BlazarCryptoFileImpl implements BlazarCryptoFile, InitializingBean {
             throw new RuntimeException("error updating crypto file: " + e.getMessage(), e);
         }
     }
+    
+    @Override
+    public void deletePassword(String userID, String resource) {
+        logger.info("deleting password for {}/{}", userID, resource);
+        
+        try {
+            BlazarCryptoFileKeyImpl key = makeKey(userID, resource);
+            cryptoData.remove(key);
+
+            writeCryptoFile();
+        } catch (IOException e) {
+            throw new RuntimeException("error updating crypto file: " + e.getMessage(), e);
+        }
+    }
 
     @Override
     public Collection<BlazarCryptoFileKey> getKeys() {
