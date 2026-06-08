@@ -5,6 +5,7 @@
 package com.blazartech.products.crypto.impl;
 
 import com.blazartech.products.crypto.BlazarCryptoFileKey;
+import java.util.Comparator;
 
 /**
  * define an object to combine the user ID and resource.
@@ -41,11 +42,9 @@ public class BlazarCryptoFileKeyImpl implements BlazarCryptoFileKey {
     
     @Override
     public int compareTo(BlazarCryptoFileKey o) {
-        if (getUserID().compareTo(o.getUserID()) == 0) {
-            return getResource().compareTo(o.getResource());
-        } else {
-            return getUserID().compareTo(o.getUserID());
-        }
+        return Comparator.comparing(BlazarCryptoFileKey::getUserID)
+                .thenComparing(BlazarCryptoFileKey::getResource)
+                .compare(this, o);
     }
     
 }
